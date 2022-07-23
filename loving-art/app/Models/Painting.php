@@ -10,7 +10,7 @@ class Painting extends Model
     use HasFactory;
 
     protected $fillable=[
-        // 'artist_id',
+        'artist_id',
         'art_period_id',
         'title',
         'description',
@@ -20,5 +20,10 @@ class Painting extends Model
     public function artPeriod()
     {
         return $this->belongsTo(ArtPeriod::class);
+    }
+
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
     }
 }
