@@ -15,7 +15,7 @@ class CreateArtistsTable extends Migration
     {
         Schema::create('artists', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('country_id');
+            $table->foreignId('country_id');
             $table->string('name');
             $table->string('lastname');
             $table->date('date_of_birth');

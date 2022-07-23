@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Artist;
+use App\Models\ArtPeriod;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,11 @@ class PaintingFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title'=>$this->faker->title(),
+            'description'=>$this->faker->paragraph(),
+            'year'=>$this->faker->year(),
+            'art_period_id'=>ArtPeriod::factory(),
+            'artist_id'=>Artist::factory()
         ];
     }
 }
