@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaintingsTable extends Migration
+class  CreateArtPeriodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreatePaintingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paintings', function (Blueprint $table) {
+        Schema::create('art_periods', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('artist_id');
-            $table->foreignId('art_period_id');
-            $table->string('title');
-            $table->string('description');
-            $table->integer('year');
+            $table->string('art_period_name')->unique();
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreatePaintingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paintings');
+        Schema::dropIfExists('art_periods');
     }
 };

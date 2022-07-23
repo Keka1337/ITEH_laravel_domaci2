@@ -11,9 +11,14 @@ class Painting extends Model
 
     protected $fillable=[
         // 'artist_id',
-        // 'art_period_id',
+        'art_period_id',
         'title',
         'description',
         'year'
     ];
+
+    public function artPeriod()
+    {
+        return $this->belongsTo(ArtPeriod::class);
+    }
 }
