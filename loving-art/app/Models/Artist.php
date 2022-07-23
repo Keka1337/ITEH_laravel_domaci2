@@ -19,4 +19,8 @@ class Artist extends Model
     {
         return $this->hasMany(Painting::class);
     }  
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }
