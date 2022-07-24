@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CountryResource extends JsonResource
+class ArtPeriodResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -12,10 +12,12 @@ class CountryResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+
+    public static $wrap="ArtPeriod";
     public function toArray($request)
     {
         return [
-            'name'=>$this->resource->country_name
+            'name'=>$this->resource->art_period_name
         ];
     }
 }
