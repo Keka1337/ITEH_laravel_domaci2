@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ArtPeriodController;
 use App\Http\Controllers\PaintingController;
+use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('art_periods',ArtPeriodController::class);
 Route::resource('/artists',ArtistController::class);
-Route::resource('/paintings',PaintingController::class)->only(['show']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    Route::get('/profile', function (Request $request) {
+        return auth()->user();
+    });
+
+    Route::resource('paintings', PaintingController::class)->only(['update', 'store', 'destroy']);
+
+    // Route::post('/logout', [AuthController::class, 'logout']);
+
+});
+
+Route::resource('paintings', PaintingController::class)->only(['index']);

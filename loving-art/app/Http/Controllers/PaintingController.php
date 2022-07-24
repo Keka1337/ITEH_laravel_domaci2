@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PaintingResource;
 use App\Models\Painting;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class PaintingController extends Controller
@@ -38,6 +39,18 @@ class PaintingController extends Controller
      */
     public function store(Request $request)
     {
+        $validator=Validator::make($request->all(),[
+            'artist_id'=>'required',
+            'art_period_id'=>'required',
+            'title'=>'required|string|max:255',
+            'description'=>'required|string',
+            'year'=>'required',
+        ]);
+        if($validator->fails()){
+             return response()->json($validator->errors());
+        }
+
+
         $painting = Painting::create([
             'artist_id' => $request->artist_id,
             'art_period_id' => $request->art_period_id,
@@ -87,6 +100,17 @@ class PaintingController extends Controller
 
     public function update(Request $request, Painting $painting)
     {
+        $validator=Validator::make($request->all(),[
+            'artist_id'=>'required',
+            'art_period_id'=>'required',
+            'title'=>'required|string|max:255',
+            'description'=>'required|string',
+            'year'=>'required',
+        ]);
+        if($validator->fails()){
+             return response()->json($validator->errors());
+        }
+
         $painting->artist_id = $request->artist_id;
         $painting->art_period_id = $request->art_period_id;
         $painting->title = $request->title;

@@ -16,11 +16,11 @@ class ArtistResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->resource->id,
+            //id'=>$this->resource->id,
             'name'=>$this->resource->name,
             'lastname'=>$this->resource->lastname,
             'date_of_birth'=>$this->resource->date_of_birth,
-            // 'country_id'=>new CountryResource($this->resource->country)
+            'country_id'=>new CountryResource($this->resource->country)
         ];
     }
 }
