@@ -20,7 +20,7 @@ class ArtistFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'lastname' => $this->faker->lastName(),
-            'date-of-birth' => $this->faker->date(),
+            'date_of_birth' => $this->faker->date(),
             'country_id' => Country::factory(),
         ];
     }

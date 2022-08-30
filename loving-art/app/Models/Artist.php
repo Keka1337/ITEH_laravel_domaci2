@@ -9,7 +9,7 @@ class Artist extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'lastname',
         'date_of_birth'
@@ -22,6 +22,5 @@ class Artist extends Model
     public function paintings()
     {
         return $this->hasMany(Painting::class);
-    }  
-
+    }
 }

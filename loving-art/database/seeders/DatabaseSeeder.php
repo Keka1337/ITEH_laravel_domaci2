@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         Painting::truncate();
         ArtPeriod::truncate();
 
-        Painting::factory()->create(5);
-        User::factory()->create(5);
+        Painting::factory(5)->create();
+        User::factory(5)->create();
     }
 }
