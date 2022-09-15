@@ -13,11 +13,11 @@ class ArtPeriodResource extends JsonResource
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
 
-    public static $wrap="ArtPeriod";
+    public static $wrap = "ArtPeriod";
     public function toArray($request)
     {
         return [
-            'name'=>$this->resource->art_period_name
+            'art_period_name' => $this->resource->art_period_name
         ];
     }
 }

@@ -39,15 +39,15 @@ class PaintingController extends Controller
      */
     public function store(Request $request)
     {
-        $validator=Validator::make($request->all(),[
-            'artist_id'=>'required',
-            'art_period_id'=>'required',
-            'title'=>'required|string|max:255',
-            'description'=>'required|string',
-            'year'=>'required',
+        $validator = Validator::make($request->all(), [
+            'artist_id' => 'required',
+            'art_period_id' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'year' => 'required',
         ]);
-        if($validator->fails()){
-             return response()->json($validator->errors());
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
         }
 
 
@@ -58,7 +58,7 @@ class PaintingController extends Controller
             'description' => $request->description,
             'year' => $request->year
         ]);
-        return response()->json(['The painting has been successfully stored!',new PaintingResource($painting)]);
+        return response()->json(['The painting has been successfully stored!', new PaintingResource($painting)]);
     }
 
     /**
@@ -67,9 +67,13 @@ class PaintingController extends Controller
      * @param  \App\Models\Painting  $painting
      * @return \Illuminate\Http\Response
      */
-    public function show(Painting $painting)
+    public function show(Painting $paintingID) // prosledi id
     {
-        return new PaintingResource($painting);
+        $painting = Painting::find($paintingID);
+        if (is_null($painting)) {
+            return response()->json(['A painting with that ID does not exist!']);
+        }
+        return response()->json($painting);
     }
 
     /**
@@ -100,15 +104,15 @@ class PaintingController extends Controller
 
     public function update(Request $request, Painting $painting)
     {
-        $validator=Validator::make($request->all(),[
-            'artist_id'=>'required',
-            'art_period_id'=>'required',
-            'title'=>'required|string|max:255',
-            'description'=>'required|string',
-            'year'=>'required',
+        $validator = Validator::make($request->all(), [
+            'artist_id' => 'required',
+            'art_period_id' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'year' => 'required',
         ]);
-        if($validator->fails()){
-             return response()->json($validator->errors());
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
         }
 
         $painting->artist_id = $request->artist_id;
@@ -118,7 +122,7 @@ class PaintingController extends Controller
         $painting->year = $request->year;
 
         $painting->save();
-        return response()->json(['The painting has been successfully updated!',new PaintingResource($painting)]);
+        return response()->json(['The painting has been successfully updated!', new PaintingResource($painting)]);
     }
 
     /**
@@ -127,8 +131,12 @@ class PaintingController extends Controller
      * @param  \App\Models\Painting  $painting
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Painting $painting)
+    public function destroy(int $paintingID) // prosledi id
     {
+        $painting = Painting::find($paintingID);
+        if (is_null($painting)) {
+            return response()->json(['A painting with that ID does not exist!']);
+        }
         $painting->delete();
         return response()->json(['The painting has been successfully deleted!']);
     }

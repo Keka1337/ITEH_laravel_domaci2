@@ -22,22 +22,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('art_periods',ArtPeriodController::class);
-Route::resource('/artists',ArtistController::class);
+Route::resource('art_periods', ArtPeriodController::class);
+Route::resource('/artists', ArtistController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::get('/profile', function (Request $request) {
-        return auth()->user();
-    });
+    // Route::get('/profile', function (Request $request) {
+    //     return auth()->user();
+    // });
 
     Route::resource('paintings', PaintingController::class)->only(['update', 'store', 'destroy']);
-
-    // Route::post('/logout', [AuthController::class, 'logout']);
-
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::resource('paintings', PaintingController::class)->only(['index']);
